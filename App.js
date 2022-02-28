@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
 import Header from "./components/Header";
+import StartBreakScreen from "./screens/StartBreakScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -30,6 +31,7 @@ export default function App() {
     <SafeAreaView style={styles.screen}>
       <Header title="Break Time" />
       <StatusBar style="auto" />
+      <StartBreakScreen />
     </SafeAreaView>
   );
 }

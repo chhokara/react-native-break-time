@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerIOS: {
-    backgroundColor: "white",
+    backgroundColor: Colors.primary,
     borderBottomColor: Colors.primary,
     borderBottomWidth: 1,
   },
