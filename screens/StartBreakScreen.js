@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Button, Dimensions, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Button,
+  Dimensions,
+  Alert,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 import Card from "../components/Card";
 import BodyText from "../components/BodyText";
@@ -32,7 +41,9 @@ const StartBreakScreen = (props) => {
       return;
     }
     setSelectedTime(chosenTime);
+    setEnteredValue("");
     setConfirmed(true);
+    Keyboard.dismiss();
   };
 
   let confirmedOutput;
@@ -40,45 +51,52 @@ const StartBreakScreen = (props) => {
   if (confirmed) {
     confirmedOutput = (
       <Card style={styles.summaryContainer}>
-        <BodyText>Time set for {selectedTime} minutes</BodyText>
-        <MainButton onPress={() => console.log("hi")}>Start Game</MainButton>
+        <BodyText>
+          Time set for <Text style={styles.innerText}>{selectedTime}</Text>{" "}
+          minutes
+        </BodyText>
+        <MainButton onPress={props.onStartBreak.bind(this, selectedTime)}>
+          Start Break
+        </MainButton>
       </Card>
     );
   }
 
   return (
-    <View style={styles.screen}>
-      <Card style={styles.inputContainer}>
-        <BodyText>Select a Time</BodyText>
-        <Input
-          style={styles.input}
-          blurOnSubmit
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyBoardType="number-pad"
-          maxLength={2}
-          onChangeText={numberInputHandler}
-          value={enteredValue}
-        />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              title="Reset"
-              onPress={() => resetInputHandler()}
-              color={Colors.primary}
-            />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.screen}>
+        <Card style={styles.inputContainer}>
+          <BodyText>Select a Time</BodyText>
+          <Input
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={2}
+            onChangeText={numberInputHandler}
+            value={enteredValue}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Reset"
+                onPress={() => resetInputHandler()}
+                color={Colors.primary}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                title="Confirm"
+                onPress={() => confirmInputHandler()}
+                color={Colors.accent}
+              />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button
-              title="Confirm"
-              onPress={() => confirmInputHandler()}
-              color={Colors.accent}
-            />
-          </View>
-        </View>
-      </Card>
-      {confirmedOutput}
-    </View>
+        </Card>
+        {confirmedOutput}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -107,6 +125,9 @@ const styles = StyleSheet.create({
   button: { width: Dimensions.get("window").width / 4 },
   summaryContainer: {
     marginTop: 20,
+  },
+  innerText: {
+    fontFamily: "open-sans-bold",
   },
 });
 export default StartBreakScreen;

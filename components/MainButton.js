@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 30,
     paddingVertical: 12,
+    marginVertical: 10,
   },
   buttonText: {
     fontSize: 18,
