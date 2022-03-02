@@ -1,34 +1,24 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Card from "../components/Card";
-import MainButton from "../components/MainButton";
-import TitleText from "../components/TitleText";
-import Colors from "../constants/Colors";
+import { View, StyleSheet } from "react-native";
+
+import Timer from "../components/Timer";
 
 const BreakScreen = (props) => {
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + props.breakTime * 60);
+
   return (
     <View style={styles.screen}>
-      <Card style={styles.timeContainer}>
-        <TitleText style={styles.text}>{props.breakTime}:00</TitleText>
-      </Card>
-      <View style={styles.buttonContainer}>
-        <MainButton>Start</MainButton>
-        <MainButton style={{ backgroundColor: Colors.accent }}>Stop</MainButton>
-      </View>
+      <Timer expiryTimestamp={time} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, padding: 10, alignItems: "center" },
-  timeContainer: { width: "80%", alignItems: "center", marginTop: 30 },
-  text: { fontSize: 40 },
-  buttonContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingHorizontal: 30,
-    marginVertical: 10,
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
   },
 });
 export default BreakScreen;

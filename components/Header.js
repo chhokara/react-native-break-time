@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerIOS: {
-    backgroundColor: Colors.primary,
+    backgroundColor: "white",
     borderBottomColor: Colors.primary,
     borderBottomWidth: 1,
   },

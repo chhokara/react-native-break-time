@@ -15,10 +15,11 @@ import BodyText from "../components/BodyText";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import MainButton from "../components/MainButton";
+import TitleText from "../components/TitleText";
 
 const StartBreakScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
 
   const numberInputHandler = (numberInput) => {
@@ -65,6 +66,7 @@ const StartBreakScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
+        <TitleText style={styles.title}>Start a New Break!</TitleText>
         <Card style={styles.inputContainer}>
           <BodyText>Select a Time</BodyText>
           <Input
@@ -106,11 +108,15 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
   },
+  title: {
+    fontSize: 20,
+  },
   inputContainer: {
     width: "80%",
     maxWidth: "95%",
     minWidth: 300,
     alignItems: "center",
+    marginTop: 20,
   },
   input: {
     width: 50,
