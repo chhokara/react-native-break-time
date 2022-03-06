@@ -25,7 +25,7 @@ export default function App() {
     setBreakTime(chosenTime);
   };
 
-  const gameOverHandler = () => {
+  const breakOverHandler = () => {
     setBreakOver(true);
   };
 
@@ -47,7 +47,7 @@ export default function App() {
   let content = <StartBreakScreen onStartBreak={startBreakHandler} />;
   if (breakTime && !breakOver) {
     content = (
-      <BreakScreen breakTime={breakTime} onBreakOver={gameOverHandler} />
+      <BreakScreen breakTime={breakTime} onBreakOver={breakOverHandler} />
     );
   } else if (breakOver) {
     content = <BreakOverScreen startNewBreak={newBreakHandler} />;
