@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 import Header from "./components/Header";
 import StartBreakScreen from "./screens/StartBreakScreen";
 import BreakScreen from "./screens/BreakScreen";
+import BreakOverScreen from "./screens/BreakOverScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -18,9 +19,19 @@ const fetchFonts = () => {
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [breakTime, setBreakTime] = useState(null);
+  const [breakOver, setBreakOver] = useState(false);
 
   const startBreakHandler = (chosenTime) => {
     setBreakTime(chosenTime);
+  };
+
+  const gameOverHandler = () => {
+    setBreakOver(true);
+  };
+
+  const newBreakHandler = () => {
+    setBreakTime(null);
+    setBreakOver(false);
   };
 
   if (!dataLoaded) {
@@ -34,8 +45,12 @@ export default function App() {
   }
 
   let content = <StartBreakScreen onStartBreak={startBreakHandler} />;
-  if (breakTime) {
-    content = <BreakScreen breakTime={breakTime} />;
+  if (breakTime && !breakOver) {
+    content = (
+      <BreakScreen breakTime={breakTime} onBreakOver={gameOverHandler} />
+    );
+  } else if (breakOver) {
+    content = <BreakOverScreen startNewBreak={newBreakHandler} />;
   }
 
   return (

@@ -9,7 +9,7 @@ const BreakScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <Timer expiryTimestamp={time} />
+      <Timer expiryTimestamp={time} onBreakOver={props.onBreakOver} />
     </View>
   );
 };

@@ -7,16 +7,23 @@ import TitleText from "./TitleText";
 import MainButton from "./MainButton";
 import Colors from "../constants/Colors";
 
-function Timer({ expiryTimestamp }) {
+const makeMeTwoDigits = (n) => {
+  return (n < 10 ? "0" : "") + n;
+};
+
+const Timer = ({ expiryTimestamp, onBreakOver }) => {
   const { minutes, seconds, resume, pause } = useTimer({
     expiryTimestamp,
-    onExpire: () => console.warn("onExpire was called"),
+    onExpire: () => onBreakOver(),
   });
+
+  let minutesText = makeMeTwoDigits(minutes);
+  let secondsText = makeMeTwoDigits(seconds);
 
   return (
     <Card style={styles.timeContainer}>
       <TitleText style={styles.text}>
-        {minutes}:{seconds}
+        {minutesText}:{secondsText}
       </TitleText>
       <View style={styles.buttonContainer}>
         <MainButton onPress={resume}>Start</MainButton>
@@ -26,7 +33,7 @@ function Timer({ expiryTimestamp }) {
       </View>
     </Card>
   );
-}
+};
 
 const styles = StyleSheet.create({
   timeContainer: {

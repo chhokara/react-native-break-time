@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   headerIOS: {
     backgroundColor: "white",
     borderBottomColor: Colors.primary,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
   },
   headerAndroid: { backgroundColor: Colors.primary },
 });
